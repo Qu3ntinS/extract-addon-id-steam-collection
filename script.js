@@ -3,14 +3,18 @@ const fs = require("fs");
 
 const collectionId = "collection-id-here";
 
-const url = "https://api.steampowered.com/ISteamRemoteStorage/GetCollectionDetails/v1/";
+const url =
+  "https://api.steampowered.com/ISteamRemoteStorage/GetCollectionDetails/v1/";
 
 async function fetchCollection() {
   try {
-    const res = await axios.post(url, new URLSearchParams({
-      collectioncount: 1,
-      "publishedfileids[0]": collectionId
-    }));
+    const res = await axios.post(
+      url,
+      new URLSearchParams({
+        collectioncount: 1,
+        "publishedfileids[0]": collectionId,
+      })
+    );
 
     const items = res.data.response.collectiondetails[0].children;
 
@@ -20,11 +24,10 @@ async function fetchCollection() {
 
     fs.writeFileSync("addons.txt", lines.join("\n"), "utf8");
 
-    console.log(`Fertig! ${items.length} Addons saved in addons.txt.`);
+    console.log(`Ready! ${items.length} Addons saved in addons.txt.`);
   } catch (err) {
     console.error("Download error:", err.message);
   }
 }
 
 fetchCollection();
-
