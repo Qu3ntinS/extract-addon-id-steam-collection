@@ -1,7 +1,7 @@
 const axios = require("axios");
 const fs = require("fs");
 
-const collectionId = "3152311816";
+const collectionId = "collection-id-here";
 
 const url = "https://api.steampowered.com/ISteamRemoteStorage/GetCollectionDetails/v1/";
 
@@ -20,10 +20,11 @@ async function fetchCollection() {
 
     fs.writeFileSync("addons.txt", lines.join("\n"), "utf8");
 
-    console.log(`Fertig! ${items.length} Addons in addons.txt gespeichert.`);
+    console.log(`Fertig! ${items.length} Addons saved in addons.txt.`);
   } catch (err) {
-    console.error("Fehler beim Laden:", err.message);
+    console.error("Download error:", err.message);
   }
 }
 
 fetchCollection();
+
